@@ -1,32 +1,31 @@
 #include <iostream>
-#include <cctype>
-#include "Cipher.h"
-#include <locale>
+#include <string>
+#include "Encryptor.h"
 using namespace std;
-void check(const wstring& Text, const int & key)
+void check(const string& text1, const int& KEY)
 {
-    wstring s=Text;
-    try {
-        Cipher kluch(key);
-        wcout<<kluch.zakodirovat(key, s)<<endl;
-        wstring g=kluch.zakodirovat(key, s);
-        wcout<<kluch.raskodirovar(key, g)<<endl;
-    } catch (const cipher_error & e) {
-        cerr<<"Error: "<<e.what()<<endl;
-    }
+     try {
+         Encryptor a;
+         string privat_text = a.encrypt(text1, KEY);
+         string decode_text = a.decrypt(privat_text, KEY);
+         cout << text1 << "\tIncoming text" << endl;
+         cout << privat_text << "\tEncrypted" <<endl;
+         cout << decode_text << "\tDeciphered" << endl;
+     } catch (const cipher_error& e) {
+         cerr << "\nError: " << e.what() << endl<< endl;
+     }
 }
-int main()
+int main(int argc, char **argv)
 {
-    wcout<<L'-'<<endl;
-    check(L"",10);
-    wcout<<L'-'<<endl;
-    check(L"THISISARANDOMTEXT",10);
-    wcout<<L'-'<<endl;
-    check(L"THISISARANDOMTEXT",1);
-    wcout<<L'-'<<endl;
-    check(L"THISISARANDOMTEXT",0);
-    wcout<<L'-'<<endl;
-    check(L"THISISARANDOMTEXT",3);
-    wcout<<L'-'<<endl;
-    return 0;
+     cout << "Correct:\n";
+     check("HELLOWORLD", 7);
+     cout << "\nIncorrect:\n";
+     check("",10);
+     cout << "\nIncorrect:\n";
+     check("HELLOWORLD1234",5);
+     cout << "\nIncorrect:\n";
+     check("HELLOWORLD1234",5);
+     cout << "\nIncorrect:\n";
+     check("HELLOWORLD1234",0);
+     return 0;
 }
