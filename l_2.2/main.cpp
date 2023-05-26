@@ -7,11 +7,11 @@ string decipher(string str, const int key);
 int main()
 {
     Cipher cpr;
-    int number = 7;
     try {
-        string original = "NACHALOVOINI";
-        string encrypted = cpr.cipher(original, number);
-        string decrypted = cpr.decipher(encrypted, number);
+        string original = "TEXTFORTRANSCRYPT";
+        int key = cpr.key();
+        string encrypted = cpr.cipher(original, key);
+        string decrypted = cpr.decipher(encrypted, key);
         cout << original << endl;
         cout << encrypted << endl;
         cout << decrypted << endl;
