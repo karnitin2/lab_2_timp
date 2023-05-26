@@ -2,6 +2,12 @@
 #include <string>
 #include "Cipher.h"
 using namespace std;
+int Cipher::key(){
+    int key;
+    cout << "Key: ";
+    cin >> key;
+    return key;
+};
 string Cipher::cipher(string str, const int key)
 {
     if (key == 0)
